@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% form_theme employerform 'bootstrap_4_layout.html.twig' %}
+
+{# {% for flashMessage in app.flashes('success') %}
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <h4 class="alert-heading">Erro</h4>
+    <p>{{ flashMessage }}</p>
+</div>
+
+{% endfor %} #}
+
+{% block body %}
+
+    {{form_start(employerform)}}
+
+    <br>
+
+    <div class="form-group row">
+
+        <div class="col-md-6">
+
+            <h4> AJOUTER UN EMPLOYER </h4>
+
+            {{ form_widget(employerform.matricule, {'attr':{'placeholder': "Matricule",
+             'class':"mb-3"}}) }}
+
+            {{ form_widget(employerform.nomcomplet, {'attr':{'placeholder': "Nom complet",
+            'class':"mb-3"}}) }}
+
+            {{ form_widget(employerform.datenaissance,{'attr':{'class':'mb-3'}})}}
+
+            {{ form_widget(employerform.salaire, {'attr':{'placeholder': "Salaire",
+            'class':"mb-3"}}) }}
+            
+
+            {{ form_widget(employerform.idservice) }}
+
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success col-md-2"> 
+    {% if modd %}
+        MODIFIER
+        {% else %}
+        AJOUTER
+    {% endif %}
+    
+    </button>
+    <br> <br>
+    <table class="table table-hover">
+    <tbody>
+        <th scope="row">Matricule</th>
+        <th scope="row">Nom complet</th>
+        <th scope="row">Date de naissance</th>
+        <th scope="row">Salaire</th>
+        <th scope="row">Service</th>
+        <th scope="row">Modifier</th>
+        <th scope="row">Supprimer</th>
+        
+    {{form_end(employerform)}}
+
+        {% for employer in reqemp %}
+
+        <tr class="table-Secondary">
+            <td scope="row">{{employer.matricule}} </td>
+            <td scope="row">{{employer.nomcomplet}} </td>
+            <td scope="row">{{employer.datenaissance | date('Y/m/d')}} </td>
+            <td scope="row">{{employer.salaire}} </td>
+            <td scope="row">{{employer.idservice.libelle}} </td>
+            <td scope="row"> 
+              <button class="btn btn-success"><a href="/form1/{{employer.id}}/modif" style="color:white; text-decoration:none;">
+              MODIFIER</a></button>  
+            </td>
+            <td scope="row"> 
+              <button class="btn btn-danger"><a href="/form1/{{employer.id}}/supempl" style="color:white; text-decoration:none;">
+              SUPPRIMER</a></button>  
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+    </table>
+    
+
+{% endblock %}
