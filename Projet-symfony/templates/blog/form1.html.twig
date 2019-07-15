@@ -50,8 +50,8 @@
     
     </button>
     <br> <br>
-    <table class="table table-hover">
-    <tbody>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
         <th scope="row">Matricule</th>
         <th scope="row">Nom complet</th>
         <th scope="row">Date de naissance</th>
@@ -59,7 +59,8 @@
         <th scope="row">Service</th>
         <th scope="row">Modifier</th>
         <th scope="row">Supprimer</th>
-        
+    </thead>
+    <tbody>
     {{form_end(employerform)}}
 
         {% for employer in reqemp %}
